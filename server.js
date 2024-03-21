@@ -1,14 +1,14 @@
-import db from "./src/utils/db_relation.js";
+import { dbConnection } from "./config/database.js";
+import Subscription from "./src/api/subscriptions/models/subscription.js";
+import Team from "./src/api/teams/models/team.js";
+import User from "./src/api/user/models/user.js";
 
-export const dbConnection = () => {
-  console.log("inside dbConnection");
-  db.mongoose
-    .connect(db.url)
-    .then(() => {
-      console.log("Connected to the database!");
-    })
-    .catch((err) => {
-      console.log("Cannot connect to the database!", err);
-      process.exit();
-    });
-};
+async function generateModels() {
+  dbConnection();
+  await User.createCollection();
+  await Team.createCollection();
+  await Subscription.createCollection();
+  process.exit();
+}
+
+generateModels();

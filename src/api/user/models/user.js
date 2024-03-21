@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-let User = await mongoose.Schema(
+let User = new mongoose.Schema(
   {
     name: String,
     email: String,
@@ -9,5 +9,5 @@ let User = await mongoose.Schema(
   { timestamps: true }
 );
 
-User = mongoose.model("users", User);
-return User;
+User = mongoose.model("User", User);
+export default User;
